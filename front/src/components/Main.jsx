@@ -28,13 +28,14 @@ const Main = () => {
         />
         <Route exact path="/cart" component={CartContainer} />
         <Route path="/products/:id" component={SingleProductContainer} />
-        <Route path="/categories"
+        <Route exact path="/categories"
           render={() => (
             <div>
               <CarruselContainer />
               <CategoriesContainer />
             </div>
           )} />
+        <Route path="/categories/:name" component={FilteredProductsContainer} />
         <Route path="/:search" component={FilteredProductsContainer} />
         <Redirect from="/" to="/products" />
       </Switch>
