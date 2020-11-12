@@ -13,11 +13,13 @@ const FilteredProductsContainer = ({ match }) => {
       }, [])
 
     const { products } = useSelector(state => state.productsReducer);
-    const filteredProducts = match.path === "/categories/:name" ? 
-    products.filter(product => product.categories.name === match.params.name)
+    const filteredProducts = match.path === "/categories/:name" ?
+    products.filter(product => product.categories[0].name == match.params.name)
     :
     products.filter(product => product.name.toLowerCase().match(match.params.search.toLowerCase()))
     console.log("esto es products", products)
+    console.log("esto es match.params.name",match.params.name)
+    console.log("filteredProducts", filteredProducts)
     return (
         <Products products={filteredProducts} />
     )

@@ -3,7 +3,7 @@ const { Category } = require("../db/models");
 const categoriesController = {
     
   findCategories(req, res) {
-    Category.find()
+    Category.find().populate("categories")
       .then(categories => res.send(categories))
       .catch(err => {
         res.status(500).send(err)

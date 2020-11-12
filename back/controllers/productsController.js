@@ -2,7 +2,7 @@ const { Product } = require("../db/models");
 
 const productsController = {
   findAll(req, res) {
-    Product.find({})
+    Product.find({}).populate("categories")
       .then((productos) => res.send(productos))
       .catch((err) => {
         res.status(500).send(err);
