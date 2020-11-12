@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {fetchProducts} from '../store/actions/productAction'
 
 
-
-const FilteredProductsContainer = ({match}) => {
+const FilteredProductsContainer = ({ match }) => {
 
     const dispatch = useDispatch();
 
@@ -22,6 +21,6 @@ const FilteredProductsContainer = ({match}) => {
     return (
         <Products products={filteredProducts} />
     )
-}
 
+}
 export default FilteredProductsContainer;

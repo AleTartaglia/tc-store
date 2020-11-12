@@ -8,6 +8,8 @@ import CategoriesContainer from "../containers/CategoriesContainer";
 import FilteredProductsContainer from "../containers/FilteredProductsContainer";
 import AdminContainer from "../containers/AdminContainer";
 import CartContainer from "../containers/CartContainer";
+import StarRatingContainer from "../containers/StarRatingContainer";
+import ReviewContainer from "../containers/ReviewContainer";
 
 const Main = () => {
   return (
@@ -15,6 +17,8 @@ const Main = () => {
       <NavbarContainer />
       <br />
       <Switch>
+        <Route exact path="/review" component={ReviewContainer} />
+        {/* <Route exact path="/rating" component={StarRatingContainer} /> */}
         <Route exact path="/admin" component={AdminContainer} />
         <Route
           exact
