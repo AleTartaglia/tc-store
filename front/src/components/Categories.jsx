@@ -11,10 +11,10 @@ export default ({ categories }) => {
           {categories
             ? categories.map((category) => {
                 return (
-                  <Col xs={6} md={3}>
-                    <Link to={`/categories/${category.name}`}>
-                      <Image src={category.image} fluid roundedCircle />
-                      <h3 className="linkCategories">{category.name}</h3>
+                  <Col xs={6} md={3} className="linkCategories">
+                    <Link to={`/categories/${category.name}`} className="linkCategories">
+                      <Image src={category.image} fluid roundedCircle className="imagenCategories" />
+                      <h3>{category.name}</h3>
                     </Link>
                   </Col>
                 );
