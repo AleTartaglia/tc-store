@@ -1,25 +1,14 @@
 import React, { useState } from "react"
 import { Form, Row, Col, Button, Card } from "react-bootstrap"
-import { deleteUser, updateUser } from "../store/actions/usersAction"
 
-export default ({ users, handleChange, filterValue }) => {
+export default ({ users, handleChange, filterValue, handleUserDelete, handleUpdateUser }) => {
   const [options, setOptions] = useState("")
-  function setUser(e) {
-    e.preventDefault()
-    console.log("options en user:", options)
-    updateUser({ email: filterValue, accessLevel: options })
-  }
-
-  function setDelete(e) {
-    e.preventDefault()
-    deleteUser({ email: filterValue })
-  }
 
 
   return (
     <Form className="adminUserForm">
       <h1>Niveles de acceso</h1>
-      <Form.Group controlId="exampleForm.ControlInput1">
+      <Form.Group>
         <Form.Label>Email address</Form.Label>
         <Form.Control onChange={handleChange} value={filterValue} name="email" type="email" placeholder="name@example.com" />
         {(filterValue.length >= 3) && (
@@ -38,7 +27,7 @@ export default ({ users, handleChange, filterValue }) => {
         )}
 
       </Form.Group>
-      <Form.Group controlId="exampleForm.ControlSelect1">
+      <Form.Group>
         <Form.Label>Levels of Access</Form.Label>
         <Form.Control as="select" onChange={(e) => { setOptions(e.target.value) }}>
           <option value=""></option>
@@ -49,8 +38,8 @@ export default ({ users, handleChange, filterValue }) => {
       <Form.Group as={Row}>
         <Col sm={{ span: 10, offset: 2 }} >
           <div className="buttonsDivUser">
-            <Button className="buttonformAdmin" onClick={setUser} variant="info">Update</Button>
-            <Button className="buttonformAdmin" onClick={setDelete} type="submit" variant="warning">Delete</Button>
+            <Button className="buttonformAdmin" onClick={(e) => handleUpdateUser(e, filterValue, options)} type="submit" variant="info">Update</Button>
+            <Button className="buttonformAdmin" onClick={handleUserDelete} type="submit" variant="warning">Delete</Button>
           </div>
         </Col>
       </Form.Group></Form>

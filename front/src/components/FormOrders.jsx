@@ -1,10 +1,10 @@
 import React, { useState } from "react"
-import { Form, Row, Col, Button, Jumbotron, Tabs, Tab, Card } from "react-bootstrap"
-import { updateOrder, fetchSingleOrder } from "../store/actions/ordersAction"
+import { Form, Row, Col, Button, Card } from "react-bootstrap"
+import { fetchSingleOrder } from "../store/actions/ordersAction"
 import { useDispatch } from "react-redux"
 
 
-export default ({ orders, singleOrder }) => {
+export default ({ orders, singleOrder, handleSubmitOrder }) => {
   const dispatch = useDispatch()
   const [options, setOptions] = useState("")
   const [newOptions, setNewOptions] = useState("")
@@ -17,14 +17,9 @@ export default ({ orders, singleOrder }) => {
     console.log("SINGLE ORDER", newOptions)
   }
 
-
-
-  const handleSubmit = (e) => {
+  function setOrder(e, id) {
     e.preventDefault()
-    updateOrder({
-      _id: singleOrder._id,
-      state: newOptions
-    })
+    dispatch(fetchSingleOrder(id))
   }
 
   return (
@@ -32,7 +27,7 @@ export default ({ orders, singleOrder }) => {
     <Form >
       <Form className="adminUserForm">
         <h1>Find and modify orders</h1>
-        <Form.Group controlId="exampleForm.ControlInput1">
+        <Form.Group>
           <Form.Label>Orders by state:</Form.Label>
           <Form.Control onClick={(e) => { setOptions(e.target.value) }} as="select" >
             <option value="">Select order status</option>
@@ -59,7 +54,7 @@ export default ({ orders, singleOrder }) => {
           )}
 
         </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group>
           <Form.Label>Select new status</Form.Label>
           <Form.Control as="select" onClick={(e) => { setNewOptions(e.target.value) }}>
             <option value="Confirmado">Confirmed</option>
@@ -70,8 +65,8 @@ export default ({ orders, singleOrder }) => {
         </Form.Group>
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }} >
-            <div style={{ width: "80%" }}>
-              <Button onClick={handleSubmit} className="buttonsDiv" type="submit" variant="info">Update</Button>
+            <div className="buttonsDivUser">
+              <Button onClick={(e) => handleSubmitOrder(e, newOptions)} className="buttonformAdmin" type="submit" variant="info">Update</Button>
             </div>
 
           </Col>
